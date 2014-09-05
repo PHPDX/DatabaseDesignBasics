@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Basics of Database Design</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="David Stanley">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/night.css" id="theme">
+		<link rel="stylesheet" href="style.css">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<!-- Begin Introduction -->
+				<section>
+					<h1>The Basics of Database Design</h1>
+					<h6>(stay awake, it isn't that bad)</h6>
+				</section>
+				<section>
+					<img src="img/ds.jpg" />
+					<h2>David Stanley</h2>
+					<ul>
+						<li>Technical Architect for MMGY Global</li>
+						<li>10 years in software engineering</li>
+						<li>Started as a POS DBA. MCDBA on MSSQL 2000</li>
+						<li>@davidstanley01</li>
+					</ul>
+				</section>
+				<section>
+					<section>
+						<h2>Assumptions and Disclaimers</h2>
+						<ul>
+							<li class="fragment">Everyone in here is familiar with database tables</li>
+							<li class="fragment">Everyone in here can write a basic SQL statement</li>
+							<li class="fragment">This example will not cover everything</li>
+							<li class="fragment">Focus is on relationships and structures, not data types</li>
+							<li class="fragment">The more complex the data, the longer it will take to derive the structure</li>
+							<li class="fragment">We only have about 45 minutes</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Outline</h2>
+						<ul>
+							<li class="fragment">First, we start with a context - The Bookstore</li>
+							<li class="fragment">Then, some general concepts</li>
+							<li class="fragment">Initial identification of data concepts</li>
+							<li class="fragment">Table structure and normalization</li>
+						</ul>
+					</section>
+				</section>
+				<!-- End Intro -->
+
+				<!-- Begin Background -->
+				<section>
+					<section>
+						<h2>Let's Build a Bookstore</h2>
+					</section>
+					<section>
+						<h2>Our Data</h2>
+						<ul>
+							<li class="fragment">Books</li>
+							<li class="fragment">Authors</li>
+							<li class="fragment">Publishers</li>
+							<li class="fragment">Genres</li>
+							<li class="fragment">Customers</li>
+							<li class="fragment">Orders</li>
+						</ul>
+					</section>
+				</section>
+				<!-- End Background -->
+
+				<!-- Begin Structures -->
+				<section>
+					<section>
+						<h2>Data Concepts in the Bookstore</h2>
+					</section>
+					<section>
+						<h2>Books</h2>
+						<ul>
+							<li class="fragment">Authors</li>
+							<li class="fragment">Title</li>
+							<li class="fragment">Publisher</li>
+							<li class="fragment">Cover Art</li>
+							<li class="fragment">ISBN Number</li>
+							<li class="fragment">Rating</li>
+							<li class="fragment">Format (hardcover, paperback, or audio)</li>
+							<li class="fragment">... and lots of other attributes</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Authors</h2>
+						<ul>
+							<li class="fragment">First Name</li>
+							<li class="fragment">Last Name</li>
+							<li class="fragment">Agent</li>
+							<li class="fragment">Contact Info</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Publishers</h2>
+						<ul>
+							<li class="fragment">Name</li>
+							<li class="fragment">Address</li>
+							<li class="fragment">Wholesaler</li>
+							<li class="fragment">Contact Info</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Genre</h2>
+						<ul>
+							<li class="fragment">Science Fiction</li>
+							<li class="fragment">History</li>
+							<li class="fragment">Thriller</li>
+							<li class="fragment">Drama</li>
+							<li class="fragment">Comedy</li>
+							<li class="fragment">... and lots more</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Customers</h2>
+						<ul>
+							<li class="fragment">Name</li>
+							<li class="fragment">Address</li>
+							<li class="fragment">Phone Number</li>
+							<li class="fragment">Email Address</li>
+							<li class="fragment">... and lots more</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Orders</h2>
+						<ul>
+							<li class="fragment">Order date</li>
+							<li class="fragment">Books</li>
+							<li class="fragment">Quantity</li>
+							<li class="fragment">Unit price</li>
+							<li class="fragment">Total</li>
+						</ul>
+					</section>
+				</section>
+				<!-- End Structures -->
+
+				<!-- Begin Relationships -->
+				<section>
+					<section>
+						<h2>Relationships and Rules</h2>
+						<ul>
+							<li class="fragment">One publisher can have many books, while each book has only one publisher</li>
+							<li class="fragment">One author can have many books, while each book may have multiple authors</li>
+							<li class="fragment">Books can be in multiple genres at once</li>
+							<li class="fragment">A customer can order multiple books in a single order</li>
+						</ul>
+					</section>
+				</section>
+				<!-- End Relationships -->
+
+				<section>
+					<h2>SQL</h2>
+					<ul>
+						<li class="fragment">
+							<strong>DDL - Data Definition Language</strong>
+							<p>CREATE, DROP, ALTER statements</p>
+						</li>
+						<li class="fragment">
+							<strong>DML - Data Manipulation Language</strong>
+							<p>SELECT, INSERT, UPDATE, DELETE statements</p>
+						</li>
+						<li class="fragment">
+							<strong>DCL - Data Control Language</strong>
+							<p>GRANT, REVOKE statements</p>
+						</li>
+					</ul>
+				</section>
+				<section>
+					<section>
+						<h2>Primary Structures</h2>
+						<ul>
+							<li class="fragment">Table</li>
+							<li class="fragment">View</li>
+							<li class="fragment">Trigger</li>
+							<li class="fragment">Stored Procedure</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Table</h2>
+						<p>A workbook in your spreadsheet, plus some rules and stuff</p>
+						<pre><code>
+CREATE TABLE `genres` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR,
+  `description` TEXT,
+  PRIMARY KEY  (`id`)
+);
+						</code></pre>
+					</section>
+					<section>
+						<h2>View</h2>
+						<p>The saved/cached output of a query... sort of</p>
+						<p>Materialized vs non-materialized</p>
+						<pre><code>
+CREATE VIEW `simple_view` AS
+  SELECT u.first_name,
+    u.last_name,
+    b.name
+  FROM users u,
+    businesses b
+  WHERE u.business_id = b.id;
+						</code></pre>
+					</section>
+					<section>
+						<h2>Trigger</h2>
+						<p>An event listener, but inside the database</p>
+						<pre><code>
+CREATE TRIGGER sanityCheck
+  BEFORE INSERT ON my_table
+  FOR EACH ROW
+  BEGIN
+    IF something THEN
+      SET NEW.S_ID = 0;
+    END IF;
+  END;
+						</code></pre>
+					</section>
+					<section>
+						<h2>Stored Procedure</h2>
+						<p>Encapsulated bundle of logic and pain</p>
+						<pre><code>
+CREATE PROCEDURE user_count(OUT param INT)
+BEGIN
+  SELECT COUNT(*) INTO param FROM database.user;
+END;
+
+CALL user_count();
++------+
+| 3    |
++------+
+						</code></pre>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Normalization</h2>
+						<img src="img/normal.jpg" />
+						<p>http://www.epikos.org/wp-content/uploads/2014/05/normal12.jpg</p>
+					</section>
+					<section>
+						<h2>First Normal Form (1NF)</h2>
+						<ul>
+							<li class="fragment">No duplicate columns in a row</li>
+							<li class="fragment">Each row identified by a unique attribute (either single column or tuple of multiple columns)</li>
+							<li class="fragment">Each book has a unique <code>book_id</code></li>
+						</ul>
+					</section>
+					<section>
+						<h2>Second Normal Form (2NF)</h2>
+						<ul>
+							<li class="fragment">Must meet 1NF</li>
+							<li class="fragment">Repetitive data removed to separate table</li>
+							<li class="fragment">Relationship to table enforced by foreign keys</li>
+							<li class="fragment">A publisher is associated with a book through the inclusion of a <code>publisher_id</code> column on the <code>books</code> table</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Third Normal Form (3NF)</h2>
+						<ul>
+							<li class="fragment">Must meet 2NF</li>
+							<li class="fragment">Remove any columns not related to or wholly dependent upon the primary key</li>
+							<li class="fragment">In our <code>orders</code> table, the <code>total</code> column is a derived value, dependent upon quantity and price</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Boyce-Codd Normal Form (BCNF or 3.5NF)</h2>
+						<ul>
+							<li class="fragment">Must be in 3NF</li>
+							<li class="fragment">Every determinant must be a candidate key</li>
+							<li class="fragment">The <code>customer_id</code> value identifies the <code>first_name</code> and <code>last_name</code>
+							<li class="fragment">The <code>first_name</code> and  <code>last_name</code> can be used to determine the <code>customer_id</code> value</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Fourth Normal Form (4NF)</h2>
+						<ul>
+							<li class="fragment">Must be in 3NF (BCNF not necessary)</li>
+							<li class="fragment">No multi-valued dependencies</li>
+							<li class="fragment">Having a book with "audio" type does not imply that it must also have a "hardcover" or "paperback" type</li>
+						</ul>
+					</section>
+				</section>
+				<!-- End General -->
+
+				<section>
+					<h2>Keys</h2>
+					<ul>
+						<li class="fragment">Primary</li>
+						<li class="fragment">Foreign</li>
+						<li class="fragment">Unique</li>
+						<li class="fragment">Composite</li>
+						<li class="fragment">Surrogate</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Indexes</h2>
+					<ul>
+						<li class="fragment">Clustered vs Non-clustered</li>
+						<li class="fragment">Primary Keys are automatically indexed (clustered)</li>
+						<li class="fragment">You can have multiple non-clustered indexes</li>
+					</ul>
+				</section>
+
+				<section>
+					<section>
+						<h2>Resolving Relationships and Storing Attributes</h2>
+						<h6>Think about the queries when designing the structure</h6>
+					</section>
+					<section>
+						<h2>Publishers</h2>
+						<pre><code>
+CREATE TABLE `publishers` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR,
+  `address_1` VARCHAR,
+  `address_2` VARCHAR,
+  `zip` INT(5),
+  `contact_email` VARCHAR,
+  `publisher_id` INT,
+  PRIMARY KEY  (`id`)
+);
+						</code></pre>
+					</section>
+					<section>
+						<h2>Authors</h2>
+						<pre><code>
+CREATE TABLE `authors` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `first_name` VARCHAR,
+  `last_name` VARCHAR,
+  `agent` VARCHAR,
+  `phone_number` INT(10),
+  PRIMARY KEY  (`id`)
+);
+						</code></pre>
+					</section>
+					<section>
+						<h2>Genres</h2>
+						<pre><code>
+CREATE TABLE `genres` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR,
+  `description` TEXT,
+  PRIMARY KEY  (`id`)
+);
+						</code></pre>
+					</section>
+					<section>
+						<h2>Books</h2>
+						<pre><code>
+CREATE TABLE `books` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR,
+  `isbn` VARCHAR,
+  `cover_art` VARCHAR,
+  `rating` TINYINT,
+  `unit_price` DECIMAL(8,2),
+  PRIMARY KEY  (`id`)
+);
+ALTER TABLE `books` ADD CONSTRAINT `books_fk1`
+  FOREIGN KEY (`publisher_id`) REFERENCES publishers(`id`);
+					</code></pre>
+					</section>
+					<section>
+						<h2>Books and Authors</h2>
+						<p>One author can have many books, while each book may have multiple authors (many-to-many)</p>
+						<img src="img/book_author.png" />
+						<pre><code>
+CREATE TABLE `books_authors` (
+  `book_id` INT NOT NULL AUTO_INCREMENT,
+  `author_id` INT NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY  (`book_id`,`author_id`)
+);
+ALTER TABLE `books_authors` ADD CONSTRAINT `books_authors_fk1`
+  FOREIGN KEY (`book_id`) REFERENCES books(`id`);
+ALTER TABLE `books_authors` ADD CONSTRAINT `books_authors_fk2`
+  FOREIGN KEY (`author_id`) REFERENCES authors(`id`);
+						</code></pre>
+					</section>
+					<section>
+						<h2>Books and Genres</h2>
+						<p>Books can be in multiple genres at once, while a single genre can have many books (many-to-many)</p>
+						<img src="img/book_genre.png" />
+						<pre><code>
+CREATE TABLE `books_genres` (
+  `book_id` INT NOT NULL AUTO_INCREMENT,
+  `genre_id` INT NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY  (`book_id`,`genre_id`)
+);
+ALTER TABLE `books_genres` ADD CONSTRAINT `books_genres_fk1`
+  FOREIGN KEY (`book_id`) REFERENCES books(`id`);
+ALTER TABLE `books_genres` ADD CONSTRAINT `books_genres_fk2`
+  FOREIGN KEY (`genre_id`) REFERENCES genres(`id`);
+						</code></pre>
+					</section>
+					<section>
+						<h2>Customers</h2>
+						<pre><code>
+CREATE TABLE `customers` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `first_name` VARCHAR,
+  `last_name` VARCHAR,
+  `phone_number` INT(10),
+  `email` VARCHAR,
+  PRIMARY KEY  (`id`)
+);
+						</code></pre>
+					</section>
+					<section>
+						<h2>Books and Orders and Order Details</h2>
+						<p>An order may contain multiple books for a single customer</p>
+						<img src="img/book_customer_order.png" />
+						<pre><code>
+CREATE TABLE `orders` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `customer_id` INT,
+  `order_date` DATETIME,
+  PRIMARY KEY  (`id`)
+);
+ALTER TABLE `orders` ADD CONSTRAINT `orders_fk1` FOREIGN KEY (`customer_id`) REFERENCES customers(`id`);
+
+CREATE TABLE `order_detail` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `book_id` INT,
+  `order_id` INT,
+  `quantity` INT,
+  `format` ENUM,
+  PRIMARY KEY  (`id`)
+);
+ALTER TABLE `order_detail` ADD CONSTRAINT `order_detail_fk1` FOREIGN KEY (`book_id`) REFERENCES books(`id`);
+ALTER TABLE `order_detail` ADD CONSTRAINT `order_detail_fk2` FOREIGN KEY (`order_id`) REFERENCES orders(`id`);
+						</code></pre>
+					</section>
+					<section>
+						<h2>The Whole Thing</h2>
+						<img src="img/db.png" />
+					</section>
+				</section>
+
+
+				<!-- Begin Views -->
+				<section>
+					<section>
+						<h2>Helpful Views</h2>
+						<p>"I need to see every order from the last week with quatity of items ordered, total price, order date, customer's full name and customer's phone number"</p>
+					</section>
+					<section>
+						<h2>Option 1</h2>
+						<p>Run the same query every time</p>
+						<pre><code>
+SELECT orders.date,
+  customer.first_name +' '+ customer.last_name,
+  customer.phone_number,
+  customer.email,
+  (SELECT sum(order_detail.quantity)
+	FROM order_detail, orders
+	WHERE orders.date >= now()
+	 AND orders.id = order_detail.order_id) as quantity,
+  (SELECT sum(order_detail.quantity * books.unit_price)
+	FROM order_detail, orders, books
+	WHERE orders.date >= now()
+	 AND orders.id = order_detail.order_id
+	 AND books.id = order_detail.book_id) as total
+FROM orders, order_detail, customers, books
+WHERE orders.date >= now()
+  AND customer.id = orders.customer_id;
+						</code></pre>
+					</section>
+					<section>
+						<h2>Option 2</h2>
+						<p>Create a view off that query, and then just query the view</p>
+						<pre><code>
+CREATE VIEW order_summary AS
+ SELECT orders.date,
+   customer.first_name +' '+ customer.last_name as name,
+   customer.phone_number,
+   customer.email,
+   (SELECT sum(order_detail.quantity)
+	 FROM order_detail, orders
+	 WHERE orders.id = order_detail.order_id) as quantity,
+   (SELECT sum(order_detail.quantity * books.unit_price)
+	 FROM order_detail, orders, books
+	 WHERE orders.id = order_detail.order_id
+	  AND books.id = order_detail.book_id) as total
+ FROM orders, order_detail, customers, books
+ WHERE customer.id = orders.customer_id;
+						</code></pre>
+						<pre><code>
+SELECT * FROM order_summary WHERE orders.date >= now();
+						</code></pre>
+					</section>
+				</section>
+				<!-- End Keys -->
+
+				<section>
+					<h2>Questions?</h2>
+				</section>
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'fade', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

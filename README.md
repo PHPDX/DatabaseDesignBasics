@@ -1,4 +1,4 @@
-DatabaseDesignBasics
-====================
+The Thermodynamics of Software Systems
+======================================
 
-Slides for PHPDX talk on Database Design Basics, given on 9/2/2014
+This talk was given at the October meeting of the PDX PHP User's Group.
